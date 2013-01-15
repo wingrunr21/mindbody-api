@@ -14,7 +14,7 @@ describe MindBody do
 			MindBody.configure do |config|
 				yielded_object = config
 			end
-			yielded_object.should be MindBody.configuration
+			expect(yielded_object).to be MindBody.configuration
 		end
 	end
 end
@@ -36,9 +36,9 @@ describe MindBody::Config do
 		it { should_not be_nil }
 
 		it 'should have default values' do
-			@config.source_name.should == ''
-			@config.source_key.should == ''
-			@config.site_ids.should == []
+			expect(@config.source_name).to eq('')
+			expect(@config.source_key).to eq('')
+			expect(@config.site_ids).to eq([])
 		end
 
 		it 'should load config data from ENV' do
@@ -47,33 +47,33 @@ describe MindBody::Config do
 			ENV['MINDBODY_SITE_IDS'] = '1,2,3,-4'
 
 			@config = MindBody::Config.new
-			@config.source_name.should == 'test'
-			@config.source_key.should == 'key1234'
-			@config.site_ids.should == [1,2,3,-4]
+			expect(@config.source_name).to eq('test')
+			expect(@config.source_key).to eq('key1234')
+			expect(@config.site_ids).to eq([1,2,3,-4])
 		end
 
 		it 'should allow arbitrary delimiters for MINDBODY_SITE_IDS' do
 			ENV['MINDBODY_SITE_IDS'] = '1 2 3 -4'
 			@config = MindBody::Config.new
-			@config.site_ids.should == [1,2,3,-4]
+			expect(@config.site_ids).to eq([1,2,3,-4])
 
 			ENV['MINDBODY_SITE_IDS'] = '1;2;3;-4'
 			@config = MindBody::Config.new
-			@config.site_ids.should == [1,2,3,-4]
+			expect(@config.site_ids).to eq([1,2,3,-4])
 
 			ENV['MINDBODY_SITE_IDS'] = '1:2:3:-4'
 			@config = MindBody::Config.new
-			@config.site_ids.should == [1,2,3,-4]
+			expect(@config.site_ids).to eq([1,2,3,-4])
 		end
 	end
 
 	describe '#site_ids=' do
 		it 'should wrap all input into an array' do
 			@config.site_ids = 5
-			@config.site_ids.should == [5]
+			expect(@config.site_ids).to eq([5])
 
 			@config.site_ids = [3,4]
-			@config.site_ids.should == [3,4]
+			expect(@config.site_ids).to eq([3,4])
 		end
 	end
 end
