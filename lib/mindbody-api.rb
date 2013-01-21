@@ -1,6 +1,8 @@
 require 'active_support/inflector'
 
 require 'mindbody-api/version'
+require 'mindbody-api/models'
+require 'mindbody-api/service'
 
 module MindBody
   class << self
