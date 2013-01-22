@@ -8,12 +8,12 @@ module MindBody
     class Service
       extend Savon::Model
 
-      WSDL_URL = 'https://api.mindbodyonline.com/0_5/%s.asmx?wsdl'
+      WSDL_PATH = File.expand_path(File.join(__FILE__, '..', '..', '..', 'wsdl', '%s.wsdl'))
 
       class << self
         def service(name)
-          @wsdl = WSDL_URL % name.to_s
-          client wsdl: @wsdl
+          @wsdl = WSDL_PATH % name.to_s
+          client :wsdl => @wsdl
         end
 
         def client(globals = {})

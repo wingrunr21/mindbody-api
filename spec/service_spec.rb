@@ -12,7 +12,7 @@ describe MindBody::Services::Service do
 			before { subject.service(:test) }
 
 			it 'should set the wsdl for the "test" service name' do
-				expect(subject.instance_variable_get('@wsdl')).to eql('https://api.mindbodyonline.com/0_5/test.asmx?wsdl')
+				expect(subject.instance_variable_get('@wsdl')).to match(/wsdl\/test\.wsdl/)
 			end
 		end
 
