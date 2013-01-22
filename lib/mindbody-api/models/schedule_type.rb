@@ -5,9 +5,8 @@ module MindBody
 
       attribute :type, String
 
-      def initialize(type)
-        return nil unless VALID_TYPES.include?(type)
-        super(:type => type)
+      def initialize(t)
+        self.type = VALID_TYPES.include?(t) ? t : nil
       end
     end
   end

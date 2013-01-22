@@ -12,6 +12,6 @@ describe MindBody::Models::ScheduleType do
     before { @type = MindBody::Models::ScheduleType.new('foobar') }
     subject { @type }
 
-    it { should be_nil }
+    its(:type) { should be_nil }
   end
 end
