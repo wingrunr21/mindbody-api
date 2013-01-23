@@ -1,4 +1,3 @@
-require 'httpclient'
 require 'savon'
 require 'mindbody-api/client'
 require 'mindbody-api/ext/savon_ext'

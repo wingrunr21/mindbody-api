@@ -18,7 +18,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'savon', '~> 2.0.2'
-  gem.add_dependency 'httpclient', '~> 2.3.0.1'
   gem.add_dependency 'virtus', '~> 0.5.4'
   gem.add_dependency 'activesupport', '~> 3.2.11'
 
