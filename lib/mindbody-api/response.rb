@@ -90,7 +90,7 @@ module MindBody
           klass = "MindBody::Models::#{klass_s}".constantize
 
           # Make sure we return a properly mapped array if needed
-          value.is_a?(Array) ? value.map {|v| klass.new(v)} : klass.new(value)
+          value.is_a?(Array) ? value.map {|v| klass.new(v)} : klass.new(value) unless value.nil?
         rescue
           value
         end

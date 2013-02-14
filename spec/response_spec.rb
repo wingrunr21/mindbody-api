@@ -8,6 +8,7 @@ describe MindBody::Services::Response do
         :clients => {
           :client => [{}, {}, {}]
         },
+        :visits => nil,
         :string_list => {
           :string => ['a', 'b', 'c']
         },
@@ -93,6 +94,10 @@ describe MindBody::Services::Response do
 
     it 'should flatten an int list' do
       expect(subject.result[:int_list].class).to be(Array)
+    end
+
+    it 'should return nil for a nil entry' do
+      expect(subject.result[:visits]).to be(nil)
     end
   end
 end
