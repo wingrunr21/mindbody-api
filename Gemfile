@@ -7,3 +7,6 @@ gemspec
 gem 'rb-inotify', :require => false
 gem 'rb-fsevent', :require => false
 gem 'rb-fchange', :require => false
+
+# Savon v3
+gem 'savon', github: 'savonrb/savon', branch: 'version3'
