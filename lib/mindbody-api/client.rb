@@ -7,6 +7,7 @@ module MindBody
       def call(operation_name, locals = {}, &block)
         # Inject the auth params into the request and setup the
         # correct request structure
+        @globals.log_level(MindBody.configuration.log_level)
         locals = locals.has_key?(:message) ? locals[:message] : locals
         locals = fixup_locals(locals)
         params = {:message => {'Request' => auth_params.merge(locals)}}
