@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://clients.mindbodyonline.com/api/0_5" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://clients.mindbodyonline.com/api/0_5" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://clients.mindbodyonline.com/api/0_5" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://clients.mindbodyonline.com/API/0_4" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://clients.mindbodyonline.com/api/0_5" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides methods and attributes relating to sites and locations.</wsdl:documentation>
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://clients.mindbodyonline.com/api/0_5">
+      <s:import namespace="http://clients.mindbodyonline.com/API/0_4" />
       <s:element name="GetSites">
         <s:complexType>
           <s:sequence>
@@ -339,6 +340,8 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:MBObject">
             <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="DefaultTimeLength" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ProgramID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
@@ -437,6 +440,85 @@
           <s:element minOccurs="0" maxOccurs="1" name="RelationshipName2" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="GetResourceSchedule">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:GetResourceScheduleRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetResourceScheduleRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Date" nillable="true" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetResourceScheduleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetResourceScheduleResult" type="tns:GetResourceScheduleResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetResourceScheduleResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Results" type="s1:RecordSet" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ReserveResource">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:ReserveResourceRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReserveResourceRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ResourceID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ClientID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="StaffID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="StartDateTime" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="EndDateTime" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="LocationID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ProgramID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ReserveResourceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReserveResourceResult" type="tns:ReserveResourceResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReserveResourceResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult" />
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+    <s:schema targetNamespace="http://clients.mindbodyonline.com/API/0_4">
+      <s:complexType name="Row">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Content" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RecordSet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Row" type="s1:Row" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetSitesSoapIn">
@@ -481,6 +563,18 @@
   <wsdl:message name="GetRelationshipsSoapOut">
     <wsdl:part name="parameters" element="tns:GetRelationshipsResponse" />
   </wsdl:message>
+  <wsdl:message name="GetResourceScheduleSoapIn">
+    <wsdl:part name="parameters" element="tns:GetResourceSchedule" />
+  </wsdl:message>
+  <wsdl:message name="GetResourceScheduleSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResourceScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReserveResourceSoapIn">
+    <wsdl:part name="parameters" element="tns:ReserveResource" />
+  </wsdl:message>
+  <wsdl:message name="ReserveResourceSoapOut">
+    <wsdl:part name="parameters" element="tns:ReserveResourceResponse" />
+  </wsdl:message>
   <wsdl:portType name="Site_x0020_ServiceSoap">
     <wsdl:operation name="GetSites">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of sites.</wsdl:documentation>
@@ -516,6 +610,16 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of relationships.</wsdl:documentation>
       <wsdl:input message="tns:GetRelationshipsSoapIn" />
       <wsdl:output message="tns:GetRelationshipsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceSchedule">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets all resources schedule.</wsdl:documentation>
+      <wsdl:input message="tns:GetResourceScheduleSoapIn" />
+      <wsdl:output message="tns:GetResourceScheduleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReserveResource">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Reserves a resource.</wsdl:documentation>
+      <wsdl:input message="tns:ReserveResourceSoapIn" />
+      <wsdl:output message="tns:ReserveResourceSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Site_x0020_ServiceSoap" type="tns:Site_x0020_ServiceSoap">
@@ -576,6 +680,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetRelationships">
       <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/GetRelationships" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceSchedule">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/GetResourceSchedule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReserveResource">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/ReserveResource" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://clients.mindbodyonline.com/api/0_5" xmlns:s1="http://clients.mindbodyonline.com/API/0_4" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://clients.mindbodyonline.com/api/0_5" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides methods and attributes relating to raw data.</wsdl:documentation>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://clients.mindbodyonline.com/api/0_5" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://clients.mindbodyonline.com/API/0_4" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://clients.mindbodyonline.com/api/0_5" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://clients.mindbodyonline.com/api/0_5">
       <s:import namespace="http://clients.mindbodyonline.com/API/0_4" />
@@ -232,7 +231,7 @@
   <wsdl:message name="SelectAggregateDataCSVSoapOut">
     <wsdl:part name="parameters" element="tns:SelectAggregateDataCSVResponse" />
   </wsdl:message>
-  <wsdl:portType name="Data_x0020_ServiceSoap">
+  <wsdl:portType name="DataServiceSoap">
     <wsdl:operation name="SelectDataXml">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Issue a select statement to your MB database</wsdl:documentation>
       <wsdl:input message="tns:SelectDataXmlSoapIn" />
@@ -254,7 +253,7 @@
       <wsdl:output message="tns:SelectAggregateDataCSVSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="Data_x0020_ServiceSoap" type="tns:Data_x0020_ServiceSoap">
+  <wsdl:binding name="DataServiceSoap" type="tns:DataServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="SelectDataXml">
       <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/SelectDataXml" style="document" />
@@ -293,9 +292,8 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="Data_x0020_Service">
-    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides methods and attributes relating to raw data.</wsdl:documentation>
-    <wsdl:port name="Data_x0020_ServiceSoap" binding="tns:Data_x0020_ServiceSoap">
+  <wsdl:service name="DataService">
+    <wsdl:port name="DataServiceSoap" binding="tns:DataServiceSoap">
       <soap:address location="http://api.mindbodyonline.com/0_5/DataService.asmx" />
     </wsdl:port>
   </wsdl:service>

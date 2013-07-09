@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://clients.mindbodyonline.com/api/0_5" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://clients.mindbodyonline.com/api/0_5" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://clients.mindbodyonline.com/api/0_5" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://clients.mindbodyonline.com/api/0_5" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides methods and attributes relating to clients.</wsdl:documentation>
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://clients.mindbodyonline.com/api/0_5">
@@ -299,6 +299,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="ForeignZip" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LoginLocations" type="tns:ArrayOfLocation" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:long" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
@@ -320,6 +321,7 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:ScheduleItem">
             <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="GenderPreference" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:long" />
               <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:AppointmentStatus" />
@@ -364,6 +366,8 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:MBObject">
             <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="DefaultTimeLength" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ProgramID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
@@ -416,6 +420,11 @@
               <s:element minOccurs="0" maxOccurs="1" name="ClientRelationships" type="tns:ArrayOfClientRelationship" />
               <s:element minOccurs="0" maxOccurs="1" name="Reps" type="tns:ArrayOfRep" />
               <s:element minOccurs="0" maxOccurs="1" name="CustomClientFields" type="tns:ArrayOfCustomClientField" />
+              <s:element minOccurs="0" maxOccurs="1" name="LiabilityRelease" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoRelationship" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoPhone" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoEmail" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
@@ -548,6 +557,11 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Availability" nillable="true" type="tns:Availability" />
         </s:sequence>
       </s:complexType>
+      <s:complexType name="ArrayOfLocation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Location" nillable="true" type="tns:Location" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetSessionTypesWithinRadius">
         <s:complexType>
           <s:sequence>
@@ -647,11 +661,6 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:complexType name="ArrayOfLocation">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Location" nillable="true" type="tns:Location" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="FinderCheckoutShoppingCart">
         <s:complexType>
           <s:sequence>
@@ -690,11 +699,32 @@
           <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:complexType name="CashInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PaymentInfo">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
       <s:complexType name="CompInfo">
         <s:complexContent mixed="false">
           <s:extension base="tns:PaymentInfo">
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="GiftCardInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PaymentInfo">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardNumber" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -705,6 +735,16 @@
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
               <s:element minOccurs="0" maxOccurs="1" name="LastFour" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EncryptedTrackDataInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PaymentInfo">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="TrackData" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -725,6 +765,16 @@
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
               <s:element minOccurs="0" maxOccurs="1" name="TrackData" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CustomPaymentInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PaymentInfo">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -757,37 +807,6 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:complexType name="CustomPaymentInfo">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:PaymentInfo">
-            <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
-              <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
-      <s:complexType name="CashInfo">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:PaymentInfo">
-            <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
-              <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
-      <s:complexType name="GiftCardInfo">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:PaymentInfo">
-            <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
-              <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="CardNumber" type="s:string" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
       <s:element name="FinderCheckoutShoppingCartResponse">
         <s:complexType>
           <s:sequence>
@@ -810,6 +829,7 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:MBObject">
             <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="AuthCode" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="CartItems" type="tns:ArrayOfCartItem" />
@@ -837,6 +857,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="ClassIDs" type="tns:ArrayOfInt" />
               <s:element minOccurs="0" maxOccurs="1" name="CourseIDs" type="tns:ArrayOfLong" />
               <s:element minOccurs="0" maxOccurs="1" name="VisitIDs" type="tns:ArrayOfLong" />
+              <s:element minOccurs="0" maxOccurs="1" name="AppointmentIDs" type="tns:ArrayOfLong" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Quantity" nillable="true" type="s:int" />
@@ -858,6 +879,46 @@
             </s:sequence>
           </s:extension>
         </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Package">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Item">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="DiscountPercentage" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="SellOnline" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Services" type="tns:ArrayOfService" />
+              <s:element minOccurs="0" maxOccurs="1" name="Products" type="tns:ArrayOfProduct" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfService">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Service" nillable="true" type="tns:Service" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Service">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Item">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Price" nillable="true" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="OnlinePrice" nillable="true" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="TaxRate" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProductID" type="s:double" />
+              <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
+              <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Count" nillable="true" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfProduct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Product" nillable="true" type="tns:Product" />
+        </s:sequence>
       </s:complexType>
       <s:complexType name="Product">
         <s:complexContent mixed="false">
@@ -899,46 +960,6 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:complexType name="Service">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:Item">
-            <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="Price" nillable="true" type="s:decimal" />
-              <s:element minOccurs="0" maxOccurs="1" name="OnlinePrice" nillable="true" type="s:decimal" />
-              <s:element minOccurs="0" maxOccurs="1" name="TaxRate" type="s:decimal" />
-              <s:element minOccurs="0" maxOccurs="1" name="ProductID" type="s:double" />
-              <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
-              <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="Count" nillable="true" type="s:int" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
-      <s:complexType name="Package">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:Item">
-            <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
-              <s:element minOccurs="1" maxOccurs="1" name="DiscountPercentage" type="s:double" />
-              <s:element minOccurs="1" maxOccurs="1" name="SellOnline" type="s:boolean" />
-              <s:element minOccurs="0" maxOccurs="1" name="Services" type="tns:ArrayOfService" />
-              <s:element minOccurs="0" maxOccurs="1" name="Products" type="tns:ArrayOfProduct" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
-      <s:complexType name="ArrayOfService">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Service" nillable="true" type="tns:Service" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="ArrayOfProduct">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Product" nillable="true" type="tns:Product" />
-        </s:sequence>
-      </s:complexType>
       <s:complexType name="ArrayOfLong">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="long" type="s:long" />
@@ -961,6 +982,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="MaxCapacity" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="WebCapacity" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="TotalBooked" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TotalBookedWaitlist" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="WebBooked" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="SemesterID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="IsCanceled" type="s:boolean" />
@@ -991,6 +1013,8 @@
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:long" />
               <s:element minOccurs="0" maxOccurs="1" name="ClassID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="AppointmentID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="AppointmentGenderPreference" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="StartDateTime" type="s:dateTime" />
               <s:element minOccurs="0" maxOccurs="1" name="LateCancelled" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="EndDateTime" type="s:dateTime" />
@@ -1135,14 +1159,14 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:element name="SendUserNewPassword">
+      <s:element name="SendFinderUserNewPassword">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:SendUserNewPasswordRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:SendFinderUserNewPasswordRequest" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="SendUserNewPasswordRequest">
+      <s:complexType name="SendFinderUserNewPasswordRequest">
         <s:complexContent mixed="false">
           <s:extension base="tns:MBRequest">
             <s:sequence>
@@ -1151,14 +1175,14 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:element name="SendUserNewPasswordResponse">
+      <s:element name="SendFinderUserNewPasswordResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SendUserNewPasswordResult" type="tns:SendUserNewPasswordResult" />
+            <s:element minOccurs="0" maxOccurs="1" name="SendFinderUserNewPasswordResult" type="tns:SendFinderUserNewPasswordResult" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="SendUserNewPasswordResult">
+      <s:complexType name="SendFinderUserNewPasswordResult">
         <s:complexContent mixed="false">
           <s:extension base="tns:MBResult" />
         </s:complexContent>
@@ -1201,11 +1225,11 @@
   <wsdl:message name="GetFinderUserSoapOut">
     <wsdl:part name="parameters" element="tns:GetFinderUserResponse" />
   </wsdl:message>
-  <wsdl:message name="SendUserNewPasswordSoapIn">
-    <wsdl:part name="parameters" element="tns:SendUserNewPassword" />
+  <wsdl:message name="SendFinderUserNewPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:SendFinderUserNewPassword" />
   </wsdl:message>
-  <wsdl:message name="SendUserNewPasswordSoapOut">
-    <wsdl:part name="parameters" element="tns:SendUserNewPasswordResponse" />
+  <wsdl:message name="SendFinderUserNewPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:SendFinderUserNewPasswordResponse" />
   </wsdl:message>
   <wsdl:portType name="Finder_x0020_ServiceSoap">
     <wsdl:operation name="GetClassesWithinRadius">
@@ -1238,10 +1262,10 @@
       <wsdl:input message="tns:GetFinderUserSoapIn" />
       <wsdl:output message="tns:GetFinderUserSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SendUserNewPassword">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sends the user a new password.</wsdl:documentation>
-      <wsdl:input message="tns:SendUserNewPasswordSoapIn" />
-      <wsdl:output message="tns:SendUserNewPasswordSoapOut" />
+    <wsdl:operation name="SendFinderUserNewPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sends the finder user a new password.</wsdl:documentation>
+      <wsdl:input message="tns:SendFinderUserNewPasswordSoapIn" />
+      <wsdl:output message="tns:SendFinderUserNewPasswordSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Finder_x0020_ServiceSoap" type="tns:Finder_x0020_ServiceSoap">
@@ -1300,8 +1324,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SendUserNewPassword">
-      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/SendUserNewPassword" style="document" />
+    <wsdl:operation name="SendFinderUserNewPassword">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/SendFinderUserNewPassword" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
