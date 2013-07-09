@@ -1,23 +1,24 @@
 require 'spec_helper'
 
 describe MindBody::Services::Client do
-	before do
+  before do
     creds = double('credentials')
+    creds.stub(:log_level).and_return(:debug)
     creds.stub(:source_name).and_return('test')
     creds.stub(:source_key).and_return('test_key')
     creds.stub(:site_ids).and_return([-99])
     MindBody.stub(:configuration).and_return(creds)
-		@client = MindBody::Services::Client.new(:wsdl => 'spec/fixtures/wsdl/geotrust.wsdl')
+    @client = MindBody::Services::Client.new(:wsdl => 'spec/fixtures/wsdl/geotrust.wsdl')
 
     resp = double('response')
     resp.stub(:http)
     Savon::Operation.any_instance.stub(:call).and_return(resp)
     MindBody::Services::Response.any_instance.stub(:normalize_response)
-	end
+  end
 
   subject { @client }
 
-	describe '#call' do
+  describe '#call' do
     before :each do
       @locals = { :message => { 'Request' => {
                                   'SourceCredentials' => {
@@ -42,5 +43,5 @@ describe MindBody::Services::Client do
     it 'should return a MindBody::Services::Response object' do
       expect(subject.call(:hello)).to be_kind_of(MindBody::Services::Response)
     end
-	end
+  end
 end
