@@ -16,6 +16,20 @@ Or install it yourself as:
 
     $ gem install mindbody-api
 
+## Configuration
+
+mindbody-api relies on Savon to communicate with MindBody's SOAP API. By default Savon logs your requests and responses. To control the logging level of Savon via mindbody-api set the log_level config value:
+
+```
+MindBody.configure do |config|
+  config.log_level = :info # Default is :debug, options are [:debug, :info, :warn, :error, :fatal]
+end
+```
+
+If you're using Rails you can put the above code in an initializer (Example: config/initializers/mindbody-api.rb)
+
+See http://savonrb.com/version2/globals.html for more information.
+
 ## Contributing
 
 1. Fork it
