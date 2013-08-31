@@ -27,6 +27,7 @@ module MindBody
       attribute :photo_url, String
       attribute :username, String
       attribute :first_appointment_date, DateTime
+      attribute :client_relationships, Array[ClientRelationship]
 
       def name
         "#{first_name} #{last_name}"
