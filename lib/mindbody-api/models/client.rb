@@ -28,6 +28,7 @@ module MindBody
       attribute :username, String
       attribute :first_appointment_date, DateTime
       attribute :client_relationships, Array[ClientRelationship]
+      attribute :client_credit_card, ClientCreditCard
 
       def name
         "#{first_name} #{last_name}"
