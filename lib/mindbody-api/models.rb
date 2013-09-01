@@ -9,13 +9,13 @@ module MindBody
 end
 
 require 'mindbody-api/models/location'
+require 'mindbody-api/models/client_credit_card'
+require 'mindbody-api/models/relationship'
+require 'mindbody-api/models/client_relationship'
 require 'mindbody-api/models/client'
 require 'mindbody-api/models/schedule_type'
 require 'mindbody-api/models/program'
 require 'mindbody-api/models/client_service'
-require 'mindbody-api/models/client_credit_card'
-require 'mindbody-api/models/client_relationship'
-require 'mindbody-api/models/relationship'
 require 'mindbody-api/models/site'
 require 'mindbody-api/models/staff'
 require 'mindbody-api/models/visit'
