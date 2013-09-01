@@ -1,4 +1,4 @@
-Copyright (c) 2012 Stafford Brunk
+Copyright (c) 2013 Stafford Brunk
 
 MIT License
 

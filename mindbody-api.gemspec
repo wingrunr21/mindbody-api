@@ -10,7 +10,8 @@ Gem::Specification.new do |gem|
   gem.email         = ["stafford.brunk@gmail.com"]
   gem.description   = %q{A Ruby interface for the MindBody API}
   gem.summary       = %q{This gem provides a Ruby interface for the MindBody API in both a services format and a 'Rails-style' format}
-  gem.homepage      = ""
+  gem.homepage      = "http://wingrunr21.github.io/mindbody-api/"
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
