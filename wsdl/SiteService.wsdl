@@ -709,7 +709,7 @@
   <wsdl:service name="Site_x0020_Service">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides methods and attributes relating to sites and locations.</wsdl:documentation>
     <wsdl:port name="Site_x0020_ServiceSoap" binding="tns:Site_x0020_ServiceSoap">
-      <soap:address location="http://api.mindbodyonline.com/0_5/SiteService.asmx" />
+      <soap:address location="https://clients.mindbodyonline.com/api/0_5/SiteService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
