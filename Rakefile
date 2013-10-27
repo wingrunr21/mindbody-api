@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler'
 Bundler::GemHelper.install_tasks
 require 'rspec/core/rake_task'
+require 'dotenv/tasks'
 
 # Rake tasks from https://github.com/mojombo/rakegem/blob/master/Rakefile
 
@@ -29,6 +30,6 @@ Rake::RDocTask.new do |rdoc|
 end
 
 desc "Open an irb session preloaded with this library"
-task :console do
+task :console => :dotenv do
   sh "pry -Ilib -r #{name}.rb"
 end
