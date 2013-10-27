@@ -3,7 +3,7 @@ require 'virtus'
 module MindBody
   module Models
     class Base
-      include Virtus
+      include Virtus.model
     end
   end
 end
