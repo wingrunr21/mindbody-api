@@ -65,7 +65,7 @@ module MindBody
           if value.is_a? Hash
             hash[key] = normalize_hash(value)
 
-            key_singular = key.to_s.singularize.to_sym
+            key_singular = map_key(key).singularize.to_sym
 
             if value.has_key?(key_singular)
               hash[key] = value[key_singular]
