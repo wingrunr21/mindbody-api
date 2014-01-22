@@ -6,4 +6,5 @@ describe MindBody::Services::ClassService do
   it { should respond_to(:get_classes) }
   it { should respond_to(:get_class_visits) }
   it { should respond_to(:get_class_descriptions) }
+  it { should respond_to(:get_class_schedules) }
 end
