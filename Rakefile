@@ -33,3 +33,20 @@ desc "Open an irb session preloaded with this library"
 task :console => :dotenv do
   sh "pry -Ilib -r #{name}.rb"
 end
+
+namespace :wsdl do
+  desc "Update the cached MindBody API wsdls"
+  task :update do
+    require 'open-uri'
+
+    url = "https://api.mindbodyonline.com/0_5/%sService.asmx?wsdl"
+    services = %w{Appointment Class Client Finder Sale Site Staff}
+
+    services.each do |service|
+      wsdl = open(url % service).read
+      File.open("wsdl/#{service}Service.wsdl", 'w') do |f|
+        f.write wsdl
+      end
+    end
+  end
+end

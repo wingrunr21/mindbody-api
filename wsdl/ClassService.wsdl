@@ -173,6 +173,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="AcceptsMasterCard" type="s:boolean" />
           <s:element minOccurs="0" maxOccurs="1" name="AcceptsAmericanExpress" type="s:boolean" />
           <s:element minOccurs="0" maxOccurs="1" name="ContactEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ESA" nillable="true" type="s:boolean" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ClassDescription">
@@ -190,6 +191,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="LastUpdated" nillable="true" type="s:dateTime" />
               <s:element minOccurs="0" maxOccurs="1" name="Program" type="tns:Program" />
               <s:element minOccurs="0" maxOccurs="1" name="SessionType" type="tns:SessionType" />
+              <s:element minOccurs="0" maxOccurs="1" name="Active" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -1419,7 +1421,7 @@
   <wsdl:service name="Class_x0020_Service">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides methods and attributes relating to classes and enrollments.</wsdl:documentation>
     <wsdl:port name="Class_x0020_ServiceSoap" binding="tns:Class_x0020_ServiceSoap">
-      <soap:address location="https://clients.mindbodyonline.com/api/0_5/ClassService.asmx" />
+      <soap:address location="https://api.mindbodyonline.com/0_5/ClassService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -173,6 +173,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="AcceptsMasterCard" type="s:boolean" />
           <s:element minOccurs="0" maxOccurs="1" name="AcceptsAmericanExpress" type="s:boolean" />
           <s:element minOccurs="0" maxOccurs="1" name="ContactEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ESA" nillable="true" type="s:boolean" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Resource">
@@ -946,7 +947,7 @@
   <wsdl:service name="Appointment_x0020_Service">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides methods and attributes relating to appointments.</wsdl:documentation>
     <wsdl:port name="Appointment_x0020_ServiceSoap" binding="tns:Appointment_x0020_ServiceSoap">
-      <soap:address location="https://clients.mindbodyonline.com/api/0_5/AppointmentService.asmx" />
+      <soap:address location="https://api.mindbodyonline.com/0_5/AppointmentService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
