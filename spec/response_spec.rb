@@ -40,6 +40,7 @@ describe MindBody::Services::Response do
   it { should respond_to(:current_page_index) }
   it { should respond_to(:total_page_count) }
   it { should respond_to(:remote_method) }
+  it { should respond_to(:message) }
 
   context 'when delegating to @response' do
     before :each do

@@ -3,7 +3,7 @@ module MindBody
     class Response
       attr_reader :response, :result, :status, :error_code, :xml_detail
       attr_reader :result_count, :current_page_index, :total_page_count
-      attr_reader :remote_method
+      attr_reader :remote_method, :message
 
       def initialize(res)
         @response = res
