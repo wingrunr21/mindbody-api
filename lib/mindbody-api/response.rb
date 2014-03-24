@@ -1,14 +1,15 @@
 module MindBody
   module Services
     class Response
-      attr_reader :response, :result, :status, :error_code, :xml_detail
-      attr_reader :result_count, :current_page_index, :total_page_count
-      attr_reader :remote_method, :message
+      attr_reader :response, :result, :status, :error_code, :xml_detail,
+                  :result_count, :current_page_index, :total_page_count,
+                  :remote_method, :message, :api_status
 
       def initialize(res)
         @response = res
         @result = {}
         normalize_response
+        @api_status = APIStatus.build_status(error_code, status, message)
       end
 
       # Delegate methods to the @response object

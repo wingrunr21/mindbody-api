@@ -4,6 +4,7 @@ require 'active_support/core_ext/array/extract_options'
 require 'mindbody-api/version'
 require 'mindbody-api/models'
 require 'mindbody-api/service'
+require 'mindbody-api/api_status'
 
 module MindBody
   class << self

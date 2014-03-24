@@ -14,6 +14,8 @@ describe MindBody::Services::Client do
     resp.stub(:http)
     Savon::Operation.any_instance.stub(:call).and_return(resp)
     MindBody::Services::Response.any_instance.stub(:normalize_response)
+    MindBody::Services::Response.any_instance.stub(:error_code).and_return(200)
+    MindBody::Services::Response.any_instance.stub(:status).and_return('Success')
   end
 
   subject { @client }
