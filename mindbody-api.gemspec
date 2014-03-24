@@ -22,10 +22,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'virtus', '~> 1.0.0'
   gem.add_dependency 'activesupport', '>= 3.2.11'
 
-  gem.add_development_dependency 'rspec', '~> 2.12.0'
-  gem.add_development_dependency 'webmock', '~> 1.9.0'
-  gem.add_development_dependency 'vcr', '~> 2.4.0'
-  gem.add_development_dependency 'simplecov', '~> 0.7.1'
-  gem.add_development_dependency 'guard-rspec', '~> 2.4.0'
+  gem.add_development_dependency 'rspec', '~> 2.14.0'
+  gem.add_development_dependency 'simplecov', '~> 0.8.2'
+  gem.add_development_dependency 'guard-rspec', '~> 4.2.8'
   gem.add_development_dependency 'rake', '~> 10.0.3'
 end

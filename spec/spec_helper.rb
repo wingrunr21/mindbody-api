@@ -5,14 +5,6 @@ SimpleCov.start do
 end
 
 require 'mindbody-api'
-require 'vcr'
-require 'webmock'
-
-VCR.configure do |c|
-  c.cassette_library_dir = 'spec/fixtures/cassettes'
-  c.hook_into :webmock
-  c.configure_rspec_metadata!
-end
 
 RSpec.configure do |config|
   config.color = true
