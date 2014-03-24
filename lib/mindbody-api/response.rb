@@ -107,6 +107,8 @@ module MindBody
           'staff'
         when :purchases
           'sale_item'
+        when :image_url, :mobile_image_url
+          'string'
         else
           key.to_s
         end

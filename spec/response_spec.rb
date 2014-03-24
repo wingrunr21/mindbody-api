@@ -17,7 +17,9 @@ describe MindBody::Services::Response do
         },
         :staff_members => {},
         :organizer => {},
-        :purchases => {}
+        :purchases => {},
+        :image_url => 'http://foobar.com/image.jpg',
+        :mobile_image_url => 'http://foobar.com/mobile_image.jpg'
       }
     }
   }
@@ -86,6 +88,14 @@ describe MindBody::Services::Response do
 
     it 'should map :purchases to SaleItem' do
       expect(subject.result[:purchases]).to be_an_instance_of(MindBody::Models::SaleItem)
+    end
+
+    it 'should map :image_url to String' do
+      expect(subject.result[:image_url]).to be_an_instance_of(String)
+    end
+
+    it 'should map :mobile_image_url to String' do
+      expect(subject.result[:mobile_image_url]).to be_an_instance_of(String)
     end
 
     it 'should flatten a string list' do
