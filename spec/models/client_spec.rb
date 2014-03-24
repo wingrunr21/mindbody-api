@@ -17,12 +17,19 @@ describe MindBody::Models::Client do
   it {should respond_to(:home_location)}
   it {should respond_to(:is_prospect)}
   it {should respond_to(:is_company)}
+  it {should respond_to(:emergency_contact_info_phone)}
+  it {should respond_to(:emergency_contact_info_name)}
+  it {should respond_to(:emergency_contact_info_relationship)}
+  it {should respond_to(:emergency_contact_info_email)}
   it {should respond_to(:notes)}
   it {should respond_to(:mobile_phone)}
   it {should respond_to(:home_phone)}
+  it {should respond_to(:work_phone)}
   it {should respond_to(:photo_url)}
   it {should respond_to(:username)}
   it {should respond_to(:first_appointment_date)}
+  it {should respond_to(:client_relationships)}
+  it {should respond_to(:client_credit_card)}
   it {should respond_to(:name)}
 
   it 'should concatenate first_name and last_name to be name' do
