@@ -18,8 +18,8 @@ module MindBody
       attribute :is_enrolled, Boolean
       attribute :hide_cancel, Boolean
       attribute :is_available, Boolean
-      attribute :start_date_time, DateTime
-      attribute :end_date_time, DateTime
+      attribute :start_date_time, Time
+      attribute :end_date_time, Time
       attribute :class_description, ClassDescription
       attribute :staff, Staff
 
