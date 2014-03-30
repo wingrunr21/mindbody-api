@@ -15,7 +15,9 @@ module MindBody
                       .join(',')}
             }
             locals ||= {}
-            client.call #{operation.inspect}, :message => locals.merge(req_hash)
+            client.call #{operation.inspect}, :message => locals.merge(req_hash) do
+              advanced_typecasting false
+            end
           end
         RUBY_EVAL
       end
