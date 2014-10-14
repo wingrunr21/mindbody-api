@@ -9,4 +9,5 @@ describe MindBody::Services::AppointmentService do
   it { should respond_to(:add_or_update_appointments) }
   it { should respond_to(:add_or_update_availabilities) }
   it { should respond_to(:get_active_session_times) }
+  it { should respond_to(:get_appointment_options) }
 end
