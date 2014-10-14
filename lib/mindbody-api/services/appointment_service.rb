@@ -8,6 +8,7 @@ module MindBody
       operation :get_schedule_items
       operation :add_or_update_appointments,   :required => [:appointments]
       operation :add_or_update_availabilities, :required => [:user_credentials]
+      operation :get_active_session_times
     end
   end
 end
