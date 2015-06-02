@@ -30,6 +30,7 @@ describe MindBody::Config do
     it { should respond_to(:source_name) }
     it { should respond_to(:source_key) }
     it { should respond_to(:site_ids) }
+    it { should respond_to(:savon_globals) }
   end
 
   describe '#new' do
@@ -39,6 +40,7 @@ describe MindBody::Config do
       expect(@config.source_name).to eq('')
       expect(@config.source_key).to eq('')
       expect(@config.site_ids).to eq([])
+      expect(@config.savon_globals).to eq({})
     end
 
     it 'should load config data from ENV' do

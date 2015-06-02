@@ -18,10 +18,11 @@ module MindBody
   end
 
   class Config
-    attr_accessor :log_level, :open_timeout, :read_timeout, :source_name, :source_key, :site_ids
+    attr_accessor :log_level, :source_name, :source_key, :site_ids, :open_timeout, :read_timeout, :savon_globals
 
     def initialize
       @log_level = :debug
+      @savon_globals = {}
       @source_name = ENV['MINDBODY_SOURCE_NAME'] || ''
       @source_key = ENV['MINDBODY_SOURCE_KEY'] || ''
       @site_ids = (ENV['MINDBODY_SITE_IDS'] || '').scan(/-?\d+/).map(&:to_i)

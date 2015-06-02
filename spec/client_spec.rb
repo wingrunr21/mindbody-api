@@ -7,6 +7,9 @@ describe MindBody::Services::Client do
     creds.stub(:source_name).and_return('test')
     creds.stub(:source_key).and_return('test_key')
     creds.stub(:site_ids).and_return([-99])
+    creds.stub(:open_timeout).and_return(0)
+    creds.stub(:read_timeout).and_return(0)
+    creds.stub(:savon_globals).and_return({log: false})
     MindBody.stub(:configuration).and_return(creds)
     @client = MindBody::Services::Client.new(:wsdl => 'spec/fixtures/wsdl/geotrust.wsdl')
 

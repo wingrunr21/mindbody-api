@@ -28,11 +28,16 @@ Alternatively, you may set them in an initializer:
       config.site_ids    = -99
       config.source_key  = 'abcd1234'
       config.source_name = 'SuperFoo'
-      config.log_level   = :info # Savon logging level. Default is :debug, options are [:debug, :info, :warn, :error, :fatal]
+      config.savon_globals[:log_level] = :info # Savon logging level. Default is :debug, options are [:debug, :info, :warn, :error, :fatal]
+      config.savon_globals[:filters] = ['Password'] 
+      # Enable as you see fit
+      # See http://savonrb.com/version2/globals.html for more information settings.
+      #config.savon_globals[:read_timeout] = 0
+      #config.savon_globals[:open_timeout] = 0
+      #config.savon_globals[:pretty_print_xml] = true
+      #config.savon_globals[:log] = true
     end
 
-See http://savonrb.com/version2/globals.html for more information on the logging
-setting.
 
 ## Usage
 
