@@ -28,14 +28,14 @@ Alternatively, you may set them in an initializer:
       config.site_ids    = -99
       config.source_key  = 'abcd1234'
       config.source_name = 'SuperFoo'
-      config.savon_globals[:log_level] = :info # Savon logging level. Default is :debug, options are [:debug, :info, :warn, :error, :fatal]
-      config.savon_globals[:filters] = ['Password'] 
+      config.log_level = :info # Savon logging level. Default is :debug, options are [:debug, :info, :warn, :error, :fatal]
+      config.filters = ['Password'] 
       # Enable as you see fit
       # See http://savonrb.com/version2/globals.html for more information settings.
-      #config.savon_globals[:read_timeout] = 0
-      #config.savon_globals[:open_timeout] = 0
-      #config.savon_globals[:pretty_print_xml] = true
-      #config.savon_globals[:log] = true
+      #config.read_timeout = 0
+      #config.open_timeout] = 0
+      #config.pretty_print_xml = true
+      #config.log = true
     end
 
 
@@ -80,5 +80,5 @@ See the various [issues](https://github.com/wingrunr21/mindbody-api/issues?state
 
 This gem is written by [Stafford Brunk](https://github.com/wingrunr21)
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/wingrunr21/mindbody-api/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/wingrunr21/mindbody-api/trend.png)](https://bitdeli.com/free "Bitdeli Badge") [![Build Status](https://travis-ci.org/wingrunr21/mindbody-api.png)](https://travis-ci.org/wingrunr21/mindbody-api)
 
