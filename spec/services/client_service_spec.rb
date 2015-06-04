@@ -24,4 +24,5 @@ describe MindBody::Services::ClientService do
   it { should respond_to(:validate_login) }
   it { should respond_to(:update_client_services) }
   it { should respond_to(:send_user_new_password) }
+  it { should respond_to(:remove_clients_from_classes)}
 end
