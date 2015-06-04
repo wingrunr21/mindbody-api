@@ -30,6 +30,8 @@ describe MindBody::Config do
     it { should respond_to(:source_name) }
     it { should respond_to(:source_key) }
     it { should respond_to(:site_ids) }
+    # Savon global options
+    it { should respond_to(:filters) }
   end
 
   describe '#new' do

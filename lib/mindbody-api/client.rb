@@ -6,10 +6,13 @@ module MindBody
 
       def call(operation_name, locals = {}, &block)
         # Inject the auth params into the request and setup the
-        # correct request structure
-        @globals.open_timeout(MindBody.configuration.open_timeout)
-        @globals.read_timeout(MindBody.configuration.read_timeout)
-        @globals.log_level(MindBody.configuration.log_level)
+        #Allow you to override Savon global properties
+        MindBody.configuration.to_h.each do |key, value|
+          if @globals.respond_to?(key)
+            @globals.send(key, value)
+          end
+        end
+      
         locals = locals.has_key?(:message) ? locals[:message] : locals
         locals = fixup_locals(locals)
         params = {:message => {'Request' => auth_params.merge(locals)}}
