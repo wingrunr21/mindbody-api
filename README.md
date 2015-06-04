@@ -33,7 +33,7 @@ Alternatively, you may set them in an initializer:
       # Enable as you see fit
       # See http://savonrb.com/version2/globals.html for more information settings.
       #config.read_timeout = 0
-      #config.open_timeout] = 0
+      #config.open_timeout = 0
       #config.pretty_print_xml = true
       #config.log = true
     end
