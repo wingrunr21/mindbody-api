@@ -17,19 +17,20 @@ module MindBody
     end
   end
 
-  class Config
-    attr_accessor :log_level, :open_timeout, :read_timeout, :source_name, :source_key, :site_ids
+  class Config < OpenStruct
 
-    def initialize
-      @log_level = :debug
-      @source_name = ENV['MINDBODY_SOURCE_NAME'] || ''
-      @source_key = ENV['MINDBODY_SOURCE_KEY'] || ''
-      @site_ids = (ENV['MINDBODY_SITE_IDS'] || '').scan(/-?\d+/).map(&:to_i)
-    end
-
-    # Make sure site_ids is always an Array
-    def site_ids=(ids)
-      @site_ids = [*ids]
+    def initialize()
+      defaults = 
+      {
+        log_level: :debug,
+        source_name:  ENV['MINDBODY_SOURCE_NAME'] || '',
+        source_key: ENV['MINDBODY_SOURCE_KEY'] || '',
+        site_ids: (ENV['MINDBODY_SITE_IDS'] || '').scan(/-?\d+/).map(&:to_i),
+        filters: ['Password']
+      }
+      super(defaults)
+      # Override site_id  to make sure its always an array
+      define_singleton_method("site_ids=") { |x| modifiable[:site_ids] = [*x] }
     end
   end
 end

@@ -3,10 +3,11 @@ require 'spec_helper'
 describe MindBody::Services::Client do
   before do
     creds = double('credentials')
-    creds.stub(:log_level).and_return(:debug)
     creds.stub(:source_name).and_return('test')
     creds.stub(:source_key).and_return('test_key')
     creds.stub(:site_ids).and_return([-99])
+    #Savon options
+    creds.stub(:to_h).and_return({open_timeout: 0, read_timeout: 0})
     MindBody.stub(:configuration).and_return(creds)
     @client = MindBody::Services::Client.new(:wsdl => 'spec/fixtures/wsdl/geotrust.wsdl')
 
