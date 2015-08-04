@@ -12,6 +12,7 @@ module MindBody
       attribute :web_signup, Boolean
       attribute :signed_in, Boolean
       attribute :make_up, Boolean
+      attribute :late_cancelled, Boolean
       attribute :service, ClientService
     end
   end
