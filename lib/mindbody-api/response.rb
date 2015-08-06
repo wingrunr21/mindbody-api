@@ -67,9 +67,11 @@ module MindBody
             hash[key] = normalize_hash(value)
 
             key_singular = map_key(key).singularize.to_sym
+            key_plural = key.to_s.pluralize.to_sym
 
             if value.has_key?(key_singular)
-              hash[key] = value[key_singular]
+              val = value[key_singular]
+              hash[key] = (val.is_a?(Array)) ? val : [val]
             elsif value.has_key?(:string)
               hash[key] = value[:string]
             elsif value.has_key?(:int)
