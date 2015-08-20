@@ -21,7 +21,7 @@ module MindBody
 
       private
       def auth_params
-        {
+        params = {
           'SourceCredentials' => {
            'SourceName' => MindBody.configuration.source_name,
            'Password' => MindBody.configuration.source_key,
@@ -37,6 +37,8 @@ module MindBody
             }
           }
         }
+        params.merge!({"Test" => true}) unless MindBody.configuration.prod_mode
+        params
       end
 
       def fixup_locals(locals)
