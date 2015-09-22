@@ -5,6 +5,7 @@ module MindBody
       attribute :first_name, String
       attribute :last_name, String
       attribute :gender, String
+      attribute :account_balance, Float
       attribute :email, String
       attribute :email_opt_in, Boolean
       attribute :address_line1, String
