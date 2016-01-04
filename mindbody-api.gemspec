@@ -26,4 +26,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'simplecov', '~> 0.8.2'
   gem.add_development_dependency 'guard-rspec', '~> 4.2.8'
   gem.add_development_dependency 'rake', '~> 10.0.3'
+  gem.add_development_dependency 'pry'
 end
