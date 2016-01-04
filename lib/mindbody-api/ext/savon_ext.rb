@@ -15,7 +15,21 @@ module MindBody
                       .join(',')}
             }
             locals ||= {}
+
             client.call #{operation.inspect}, :message => locals.merge(req_hash)
+          end
+        RUBY_EVAL
+
+        class_operation_module.module_eval <<-RUBY_EVAL, __FILE__, __LINE__+1
+          def #{operation.to_s.snakecase}_with_auth(auth#{!params.empty? ? ',' : ''} #{params.join(',')})
+            req_hash = {
+              #{params.select{|p| p != 'locals = {}'}
+                      .map{|p| "'#{params_key(p)}' => #{p}"}
+                      .join(',')}
+            }
+            locals ||= {}
+
+            client.call #{operation.inspect}, :auth => auth, :message => locals.merge(req_hash)
           end
         RUBY_EVAL
       end
@@ -29,6 +43,12 @@ module MindBody
         instance_operation_module.module_eval <<-RUBY_EVAL, __FILE__, __LINE__+1
           def #{operation.to_s.snakecase}(#{params.join(',')})
             self.class.#{operation.to_s.snakecase} #{params.join(',').chomp(' = {}')}
+          end
+        RUBY_EVAL
+
+        instance_operation_module.module_eval <<-RUBY_EVAL, __FILE__, __LINE__+1
+          def #{operation.to_s.snakecase}_with_auth(auth#{!params.empty? ? ',' : ''} #{params.join(',')})
+            self.class.#{operation.to_s.snakecase}_with_auth(auth, #{params.join(',').chomp(' = {}')})
           end
         RUBY_EVAL
       end

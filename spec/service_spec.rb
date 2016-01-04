@@ -30,11 +30,18 @@ describe MindBody::Services::Service do
           MindBody::Services::Service.operation :test
         end
 
-        it { should respond_to(:test) }
-        its(:new) { should respond_to(:test) }
+        it do
+          should respond_to(:test)
+          should respond_to(:test_with_auth)
+        end
+        its(:new) do
+          should respond_to(:test)
+          should respond_to(:test_with_auth)
+        end
 
         it 'should have optional locals' do
           expect(subject.method(:test).arity).to eql(-1)
+          expect(subject.method(:test_with_auth).arity).to eql(-2)
         end
 
         it 'should delegate to the class method' do
@@ -42,8 +49,10 @@ describe MindBody::Services::Service do
           locals = {:foo => :bar}
 
           subject.should_receive(:test).with(locals).once
-
           instance.test(locals)
+
+          subject.should_receive(:test_with_auth).with({}, locals).once
+          instance.test_with_auth({}, locals)
         end
       end
 
@@ -52,11 +61,18 @@ describe MindBody::Services::Service do
           MindBody::Services::Service.operation :test_required, :required => [:foo, :bar]
         end
 
-        it { should respond_to(:test_required) }
-        its(:new) { should respond_to(:test_required) }
+        it do
+          should respond_to(:test_required)
+          should respond_to(:test_required_with_auth)
+        end
+        its(:new) do
+          should respond_to(:test_required)
+          should respond_to(:test_required_with_auth)
+        end
 
         it 'should have two required params and optional locals' do
           expect(subject.method(:test_required).arity).to eql(-3)
+          expect(subject.method(:test_required_with_auth).arity).to eql(-4)
         end
 
         it 'should delegate to the class method' do
@@ -64,11 +80,14 @@ describe MindBody::Services::Service do
           locals = {:foo => :bar}
 
           subject.should_receive(:test_required).with(:foo, :bar, locals).once
-
           instance.test_required(:foo, :bar, locals)
+
+          subject.should_receive(:test_required_with_auth).with({}, :foo, :bar, locals).once
+          instance.test_required_with_auth({}, :foo, :bar, locals)
         end
 
         it 'should require two params' do
+          expect{subject.send(:test_required_with_auth, {})}.to raise_error(ArgumentError)
           expect{subject.send(:test_required)}.to raise_error(ArgumentError)
         end
       end
@@ -83,21 +102,26 @@ describe MindBody::Services::Service do
 
         it 'should have two required params and optional locals' do
           expect(subject.method(:test_no_locals).arity).to eql(2)
+          expect(subject.method(:test_no_locals_with_auth).arity).to eql(3)
         end
 
         it 'should delegate to the class method' do
           instance = subject.new
 
           subject.should_receive(:test_no_locals).with(:foo, :bar).once
-
           instance.test_no_locals(:foo, :bar)
+
+          subject.should_receive(:test_no_locals_with_auth).with({}, :foo, :bar).once
+          instance.test_no_locals_with_auth({}, :foo, :bar)
         end
 
         it 'should require two params' do
+          expect{subject.send(:test_no_locals_with_auth, {})}.to raise_error(ArgumentError)
           expect{subject.send(:test_no_locals)}.to raise_error(ArgumentError)
         end
 
         it 'should not allow locals' do
+          expect{subject.send(:test_no_locals_with_auth, {}, :foo, :bar, :foobar => 'foobar')}.to raise_error(ArgumentError)
           expect{subject.send(:test_no_locals, :foo, :bar, :foobar => 'foobar')}.to raise_error(ArgumentError)
         end
       end
