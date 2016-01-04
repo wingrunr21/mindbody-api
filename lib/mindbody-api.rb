@@ -25,8 +25,8 @@ module MindBody
       @source_name = ENV['MINDBODY_SOURCE_NAME'] || ''
       @source_key = ENV['MINDBODY_SOURCE_KEY'] || ''
       @site_ids = (ENV['MINDBODY_SITE_IDS'] || '').scan(/-?\d+/).map(&:to_i)
-      @username = ENV['MINDBODY_USERNAME'] || ''
-      @password = ENV['MINDBODY_PASSWORD'] || ''
+      @username = ENV['MINDBODY_USERNAME'] || nil
+      @password = ENV['MINDBODY_PASSWORD'] || nil
       @prod_mode = ENV['MINDBODY_PROD_MODE'] || false
     end
 
