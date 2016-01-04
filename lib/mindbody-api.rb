@@ -18,13 +18,16 @@ module MindBody
   end
 
   class Config
-    attr_accessor :log_level, :open_timeout, :read_timeout, :source_name, :source_key, :site_ids
+    attr_accessor :log_level, :open_timeout, :read_timeout, :source_name, :source_key, :site_ids, :username, :password, :prod_mode
 
     def initialize
       @log_level = :debug
       @source_name = ENV['MINDBODY_SOURCE_NAME'] || ''
       @source_key = ENV['MINDBODY_SOURCE_KEY'] || ''
       @site_ids = (ENV['MINDBODY_SITE_IDS'] || '').scan(/-?\d+/).map(&:to_i)
+      @username = ENV['MINDBODY_USERNAME'] || nil
+      @password = ENV['MINDBODY_PASSWORD'] || nil
+      @prod_mode = ENV['MINDBODY_PROD_MODE'] || false
     end
 
     # Make sure site_ids is always an Array

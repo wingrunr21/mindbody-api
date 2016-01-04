@@ -5,6 +5,7 @@ module MindBody
       attribute :first_name, String
       attribute :last_name, String
       attribute :gender, String
+      attribute :account_balance, Float
       attribute :email, String
       attribute :email_opt_in, Boolean
       attribute :address_line1, String
@@ -23,6 +24,10 @@ module MindBody
       attribute :photo_url, String
       attribute :username, String
       attribute :first_appointment_date, DateTime
+      attribute :emergency_contact_info_name, String
+      attribute :emergency_contact_info_relationship, String
+      attribute :emergency_contact_info_phone, String
+      attribute :emergency_contact_info_email, String
 
       def name
         "#{first_name} #{last_name}"

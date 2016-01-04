@@ -22,6 +22,7 @@ module MindBody
       attribute :end_date_time, DateTime
       attribute :class_description, ClassDescription
       attribute :staff, Staff
+      attribute :resource, Resource
 
       def name
         class_description.name

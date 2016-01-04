@@ -8,6 +8,7 @@ module MindBody
   end
 end
 
+require 'mindbody-api/models/resource'
 require 'mindbody-api/models/location'
 require 'mindbody-api/models/client'
 require 'mindbody-api/models/schedule_type'
@@ -29,6 +30,6 @@ require 'mindbody-api/models/payment'
 require 'mindbody-api/models/sale'
 require 'mindbody-api/models/sale_item'
 require 'mindbody-api/models/service'
-require 'mindbody-api/models/resource'
 require 'mindbody-api/models/appointment_status'
 require 'mindbody-api/models/appointment'
+require 'mindbody-api/models/waitlist_entry'
