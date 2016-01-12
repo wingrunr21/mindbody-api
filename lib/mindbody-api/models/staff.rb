@@ -21,6 +21,8 @@ module MindBody
       attribute :bio, String
       attribute :is_male, Boolean
       attribute :username, String # API does not currently return this
+      attribute :availabilities, Array[Availability]
+      attribute :unavailabilities, Array[Unavailability]
 
       # For API compatibility between Client
       alias photo_url image_url

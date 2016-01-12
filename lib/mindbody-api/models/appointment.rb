@@ -15,6 +15,8 @@ module MindBody
       attribute :first_appointment, Boolean
       attribute :client_service, ClientService
       attribute :resources, Array[Resource]
+      attribute :gender_preference, String
+      attribute :duration, Integer
     end
   end
 end

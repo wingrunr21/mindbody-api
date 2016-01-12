@@ -18,7 +18,7 @@ module MindBody
   end
 
   class Config
-    attr_accessor :log_level, :source_name, :source_key, :site_ids
+    attr_accessor :log_level, :open_timeout, :read_timeout, :source_name, :source_key, :site_ids
 
     def initialize
       @log_level = :debug
