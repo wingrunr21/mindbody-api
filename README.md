@@ -23,16 +23,28 @@ You must set your MindBody source name, key, and site ids. These values are acce
 The easiest way to set these is via three environment variables: `MINDBODY_SOURCE_NAME`, `MINDBODY_SOURCE_KEY`, and `MINDBODY_SITE_IDS`. `MINDBODY_SITE_IDS` can have any delimiter.
 
 Alternatively, you may set them in an initializer:
+```ruby
+MindBody.configure do |config|
+  config.site_ids    = -99
+  config.source_key  = 'abcd1234'
+  config.source_name = 'SuperFoo'
+end
+```
 
-    MindBody.configure do |config|
-      config.site_ids    = -99
-      config.source_key  = 'abcd1234'
-      config.source_name = 'SuperFoo'
-      config.log_level   = :info # Savon logging level. Default is :debug, options are [:debug, :info, :warn, :error, :fatal]
-    end
+Savon options can be configured the same way:
+```ruby
+MindBody.configure do |config|
+  config.savon_opts.log = true
+  config.savon_opts.log_level = :info # Default is :debug, options are [:debug, :info, :warn, :error, :fatal]
+  config.savon_opts.pretty_print_xml = true
+  # Following options are available in the `savon_opts` and on the top level as well
+  config.log_level = :info
+  config.open_timeout = 10
+  config.read_timeout = 10
+end
+```
 
-See http://savonrb.com/version2/globals.html for more information on the logging
-setting.
+See http://savonrb.com/version2/globals.html for a list of available options.
 
 ## Usage
 
@@ -76,4 +88,3 @@ See the various [issues](https://github.com/wingrunr21/mindbody-api/issues?state
 This gem is written by [Stafford Brunk](https://github.com/wingrunr21)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/wingrunr21/mindbody-api/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

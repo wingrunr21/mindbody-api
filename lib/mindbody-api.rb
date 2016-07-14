@@ -1,3 +1,4 @@
+require 'ostruct'
 require 'active_support/inflector'
 require 'active_support/core_ext/array/extract_options'
 
@@ -30,6 +31,10 @@ module MindBody
     # Make sure site_ids is always an Array
     def site_ids=(ids)
       @site_ids = [*ids]
+    end
+
+    def savon_opts
+      @savon_opts ||= OpenStruct.new
     end
   end
 end
