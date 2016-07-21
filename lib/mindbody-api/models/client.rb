@@ -23,6 +23,7 @@ module MindBody
       attribute :home_phone, String
       attribute :photo_url, String
       attribute :username, String
+      attribute :referred_by, String
       attribute :first_appointment_date, DateTime
       attribute :emergency_contact_info_name, String
       attribute :emergency_contact_info_relationship, String
