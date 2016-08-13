@@ -12,7 +12,11 @@ module MindBody
         @globals.log_level(MindBody.configuration.log_level)
         locals = locals.has_key?(:message) ? locals[:message] : locals
         locals = fixup_locals(locals)
-        params = {:message => {'Request' => auth_params.merge(locals)}}
+        params = {
+          message: {
+            'Request' => auth_params.merge('SearchText'=>{}).merge(locals)
+          }
+        }
 
         # Run the request
         response = super(operation_name, params, &block)
@@ -23,7 +27,10 @@ module MindBody
       def auth_params
         {'SourceCredentials'=>{'SourceName'=>MindBody.configuration.source_name,
                                'Password'=>MindBody.configuration.source_key,
-                               'SiteIDs'=>{'int'=>MindBody.configuration.site_ids}}}
+                               'SiteIDs'=>{'int'=>MindBody.configuration.site_ids}},
+         'UserCredentials'=>{'Username'=>'_' + MindBody.configuration.source_name,
+                             'Password'=>MindBody.configuration.source_key,
+                             'SiteIDs'=>{'int'=>MindBody.configuration.site_ids}}}
       end
 
       def fixup_locals(locals)
