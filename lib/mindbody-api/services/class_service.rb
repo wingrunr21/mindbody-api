@@ -10,6 +10,7 @@ module MindBody
       operation :get_waitlist_entries,         required: [:class_ids]
       operation :add_clients_to_classes,       required: [:class_ids, :client_ids]
       operation :remove_clients_from_classes,  required: [:class_ids, :client_ids]
+      operation :update_client_visits,         required: [:visits]
     end
   end
 end
