@@ -14,7 +14,11 @@ module MindBody
         locals = fixup_locals(locals)
         params = {
           message: {
-            'Request' => auth_params.merge('SearchText'=>{}).merge(locals)
+            # Do not include an empty 'SearchText'
+            'Request' => auth_params.merge(locals)
+
+            # Originally:
+            # 'Request' => auth_params.merge('SearchText'=>{}).merge(locals)
           }
         }
 
@@ -37,7 +41,12 @@ module MindBody
         # TODO this needs fixed to support various list types
         locals.each_pair do |key, value|
           if value.is_a? Array
-            locals[key] = {'int' => value}
+            case key
+            when 'ClientIDs'
+              locals[key] = {'string' => value}
+            else
+              raise "Does not know what to do with #{key}"
+            end
           end
         end
       end
