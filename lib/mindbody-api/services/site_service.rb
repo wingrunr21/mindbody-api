@@ -5,7 +5,7 @@ module MindBody
 
       operation :get_sites
       operation :get_locations,           :locals => false
-      operation :get_activation_code,     :locals => false
+      operation :get_activation_code
       operation :get_programs
       operation :get_session_types
       operation :get_resources
