@@ -3,8 +3,8 @@ module MindBody
     class Visit < Base
       attribute :id, Integer
       attribute :class_id, Integer
-      attribute :start_date_time, DateTime
-      attribute :end_date_time, DateTime
+      attribute :start_date_time, Time
+      attribute :end_date_time, Time
       attribute :name, String
       attribute :staff, Staff
       attribute :location, Location

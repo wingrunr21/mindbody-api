@@ -6,9 +6,9 @@ module MindBody
       attribute :count, Integer
       attribute :remaining, Integer
       attribute :name, String
-      attribute :payment_date, DateTime
-      attribute :active_date, DateTime
-      attribute :expiration_date, DateTime
+      attribute :payment_date, Time
+      attribute :active_date, Time
+      attribute :expiration_date, Time
       attribute :program, Program
     end
   end

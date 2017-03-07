@@ -3,8 +3,8 @@ module MindBody
     class Appointment < Base
       attribute :id, Integer
       attribute :status, AppointmentStatus
-      attribute :start_date_time, DateTime
-      attribute :end_date_time, DateTime
+      attribute :start_date_time, Time
+      attribute :end_date_time, Time
       attribute :notes, String
       attribute :staff_requested, Boolean
       attribute :program, Program
