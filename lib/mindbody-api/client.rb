@@ -12,7 +12,15 @@ module MindBody
         @globals.log_level(MindBody.configuration.log_level)
         locals = locals.has_key?(:message) ? locals[:message] : locals
         locals = fixup_locals(locals)
-        params = {:message => {'Request' => auth_params.merge(locals)}}
+        params = {
+          message: {
+            # Do not include an empty 'SearchText'
+            'Request' => auth_params.merge(locals)
+
+            # Originally:
+            # 'Request' => auth_params.merge('SearchText'=>{}).merge(locals)
+          }
+        }
 
         # Run the request
         response = super(operation_name, params, &block)
@@ -23,14 +31,22 @@ module MindBody
       def auth_params
         {'SourceCredentials'=>{'SourceName'=>MindBody.configuration.source_name,
                                'Password'=>MindBody.configuration.source_key,
-                               'SiteIDs'=>{'int'=>MindBody.configuration.site_ids}}}
+                               'SiteIDs'=>{'int'=>MindBody.configuration.site_ids}},
+         'UserCredentials'=>{'Username'=>'_' + MindBody.configuration.source_name,
+                             'Password'=>MindBody.configuration.source_key,
+                             'SiteIDs'=>{'int'=>MindBody.configuration.site_ids}}}
       end
 
       def fixup_locals(locals)
         # TODO this needs fixed to support various list types
         locals.each_pair do |key, value|
           if value.is_a? Array
-            locals[key] = {'int' => value}
+            case key
+            when 'ClientIDs'
+              locals[key] = {'string' => value}
+            else
+              raise "Does not know what to do with #{key}"
+            end
           end
         end
       end
