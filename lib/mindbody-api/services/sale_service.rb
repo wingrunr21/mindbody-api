@@ -3,6 +3,7 @@ module MindBody
     class SaleService < Service
       service "SaleService"
 
+      operation :checkout_shopping_cart
       operation :get_accepted_card_type,      :locals => false
       operation :get_sales
       operation :get_services

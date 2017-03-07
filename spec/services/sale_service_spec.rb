@@ -3,6 +3,7 @@ require 'spec_helper'
 describe MindBody::Services::SaleService do
   subject { MindBody::Services::SaleService }
 
+  it { should respond_to(:checkout_shopping_cart) }
   it { should respond_to(:get_accepted_card_type) }
   it { should respond_to(:get_sales) }
   it { should respond_to(:get_services) }

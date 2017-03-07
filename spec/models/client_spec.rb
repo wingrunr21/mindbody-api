@@ -24,6 +24,8 @@ describe MindBody::Models::Client do
   it {should respond_to(:username)}
   it {should respond_to(:first_appointment_date)}
   it {should respond_to(:name)}
+  it {should respond_to(:action)}
+  it {should respond_to(:referred_by)}
 
   it 'should concatenate first_name and last_name to be name' do
     subject.first_name = "Bob"
