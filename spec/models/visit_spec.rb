@@ -13,4 +13,5 @@ describe MindBody::Models::Visit do
   it { should respond_to(:signed_in) }
   it { should respond_to(:make_up) }
   it { should respond_to(:service) }
+  it { should respond_to(:late_cancelled) }
 end

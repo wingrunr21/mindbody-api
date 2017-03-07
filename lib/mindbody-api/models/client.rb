@@ -23,6 +23,8 @@ module MindBody
       attribute :photo_url, String
       attribute :username, String
       attribute :first_appointment_date, DateTime
+      attribute :action, String
+      attribute :referred_by, String
 
       def name
         "#{first_name} #{last_name}"
