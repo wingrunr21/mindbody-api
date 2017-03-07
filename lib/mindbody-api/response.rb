@@ -79,6 +79,10 @@ module MindBody
             value.map! do |i|
               i.is_a?(Hash) ? normalize_hash(i) : i
             end
+          elsif value.is_a?(DateTime) || value.is_a?(Time)
+            time = value.to_s
+            time.gsub!(/\+\d\d:\d\d/,"")
+            hash[key]=Time.parse(time)
           end
         end
 

@@ -5,8 +5,8 @@ module MindBody
       attribute :name, String
       attribute :description, String
       attribute :notes, String
-      attribute :start_date, DateTime
-      attribute :end_date, DateTime
+      attribute :start_date, Time
+      attribute :end_date, Time
       attribute :location, Location
       attribute :organizer, Staff
       attribute :program, Program

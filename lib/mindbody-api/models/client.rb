@@ -22,7 +22,7 @@ module MindBody
       attribute :home_phone, String
       attribute :photo_url, String
       attribute :username, String
-      attribute :first_appointment_date, DateTime
+      attribute :first_appointment_date, Time
 
       def name
         "#{first_name} #{last_name}"
