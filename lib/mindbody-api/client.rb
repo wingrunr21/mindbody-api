@@ -28,15 +28,17 @@ module MindBody
            'SiteIDs' => {
              'int' => MindBody.configuration.site_ids
             }
-          },
-          'UserCredentials' => {
-            'Username' => MindBody.configuration.username,
-            'Password' => MindBody.configuration.password,
-            'SiteIDs' => {
-             'int' => MindBody.configuration.site_ids
-            }
           }
         }
+        if MindBody.configuration.username && MindBody.configuration.password
+          params['UserCredentials'] = {
+              'Username' => MindBody.configuration.username,
+              'Password' => MindBody.configuration.password,
+              'SiteIDs' => {
+               'int' => MindBody.configuration.site_ids
+              }
+          }
+        end
         params.merge!({"Test" => true}) unless MindBody.configuration.prod_mode
         params
       end
