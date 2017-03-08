@@ -4,7 +4,7 @@ module MindBody
       service 'SiteService'
 
       operation :get_sites
-      operation :get_locations,           :locals => false
+      operation :get_locations
       operation :get_activation_code
       operation :get_programs
       operation :get_session_types
