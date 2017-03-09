@@ -30,7 +30,7 @@ module MindBody
             }
           }
         }
-        if MindBody.configuration.username && MindBody.configuration.password
+        if !MindBody.configuration.username.blank? && !MindBody.configuration.password.blank?
           params['UserCredentials'] = {
               'Username' => MindBody.configuration.username,
               'Password' => MindBody.configuration.password,
