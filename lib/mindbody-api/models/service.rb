@@ -6,6 +6,7 @@ module MindBody
       attribute :online_price, Float
       attribute :tax_rate, Float
       attribute :product_id, Float #why is this a float?
+      attribute :program_id, Integer
       attribute :name, String
       attribute :count, Integer
     end
