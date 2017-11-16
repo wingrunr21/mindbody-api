@@ -47,6 +47,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="SiteIDs" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="LocationID" nillable="true" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:simpleType name="XMLDetailLevel">
@@ -141,6 +142,11 @@
           <s:element minOccurs="0" maxOccurs="1" name="AcceptsAmericanExpress" type="s:boolean" />
           <s:element minOccurs="0" maxOccurs="1" name="ContactEmail" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ESA" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalWOD" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxInclusivePrices" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMSPackageEnabled" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllowsDashboardAccess" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PricingLevel" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Program">
@@ -150,6 +156,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="ScheduleType" nillable="true" type="tns:ScheduleType" />
+              <s:element minOccurs="1" maxOccurs="1" name="CancelOffset" nillable="true" type="s:int" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -188,6 +195,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="UpdateAction" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="Test" nillable="true" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="Clients" type="tns:ArrayOfClient" />
+              <s:element minOccurs="1" maxOccurs="1" name="SendEmail" nillable="true" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -207,6 +215,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MobileProvider" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="ClientCreditCard" type="tns:ClientCreditCard" />
               <s:element minOccurs="0" maxOccurs="1" name="LastFormulaNotes" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="AppointmentGenderPreference" type="s:string" />
@@ -215,12 +224,19 @@
               <s:element minOccurs="0" maxOccurs="1" name="Inactive" nillable="true" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="ClientRelationships" type="tns:ArrayOfClientRelationship" />
               <s:element minOccurs="0" maxOccurs="1" name="Reps" type="tns:ArrayOfRep" />
+              <s:element minOccurs="0" maxOccurs="1" name="SaleReps" type="tns:ArrayOfSalesRep" />
               <s:element minOccurs="0" maxOccurs="1" name="CustomClientFields" type="tns:ArrayOfCustomClientField" />
               <s:element minOccurs="0" maxOccurs="1" name="LiabilityRelease" nillable="true" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoName" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoRelationship" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoPhone" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoEmail" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PromotionalEmailOptIn" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreationDate" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Liability" type="tns:Liability" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProspectStage" type="tns:ProspectStage" />
+              <s:element minOccurs="0" maxOccurs="1" name="UniqueID" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="MembershipIcon" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
@@ -246,6 +262,8 @@
               <s:element minOccurs="0" maxOccurs="1" name="RedAlert" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="PhotoURL" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="IsProspect" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ContactMethod" nillable="true" type="s:short" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -259,6 +277,8 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:MBObject">
             <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="RequiredBusinessMode" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="RequiredConsumerMode" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
@@ -279,6 +299,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Active" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -353,7 +374,16 @@
               <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="ForeignZip" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SortOrder" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="LoginLocations" type="tns:ArrayOfLocation" />
+              <s:element minOccurs="0" maxOccurs="1" name="MultiLocation" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="AppointmentTrn" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReservationTrn" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="IndependentContractor" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="AlwaysAllowDoubleBooking" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserAccessLevel" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProviderIDs" type="tns:ArrayOfString" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProviderIDUpdateList" type="tns:ArrayOfProviderIDUpdate" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:long" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
@@ -377,6 +407,7 @@
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="GenderPreference" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="Duration" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProviderID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:long" />
               <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:AppointmentStatus" />
@@ -435,6 +466,7 @@
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="DefaultTimeLength" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="ProgramID" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumDeducted" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
@@ -493,6 +525,7 @@
           <s:enumeration value="Arrived" />
           <s:enumeration value="NoShow" />
           <s:enumeration value="Cancelled" />
+          <s:enumeration value="LateCancelled" />
         </s:restriction>
       </s:simpleType>
       <s:complexType name="ArrayOfResource">
@@ -526,6 +559,35 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Location" nillable="true" type="tns:Location" />
         </s:sequence>
       </s:complexType>
+      <s:complexType name="ArrayOfProviderIDUpdate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProviderIDUpdate" nillable="true" type="tns:ProviderIDUpdate" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProviderIDUpdate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OldProviderID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NewProviderID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSalesRep">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SalesRep" nillable="true" type="tns:SalesRep" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SalesRep">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SalesRepNumber" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ID" nillable="true" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SalesRepNumbers" type="tns:ArrayOfInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
       <s:complexType name="ArrayOfCustomClientField">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="CustomClientField" nillable="true" type="tns:CustomClientField" />
@@ -537,6 +599,20 @@
           <s:element minOccurs="0" maxOccurs="1" name="DataType" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Liability">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsReleased" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AgreementDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReleasedBy" nillable="true" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProspectStage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
         </s:sequence>
       </s:complexType>
       <s:element name="AddOrUpdateClientsResponse">
@@ -568,6 +644,7 @@
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="ClientIDs" type="tns:ArrayOfString" />
               <s:element minOccurs="0" maxOccurs="1" name="SearchText" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsProspect" nillable="true" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -625,7 +702,11 @@
       </s:element>
       <s:complexType name="GetClientIndexesRequest">
         <s:complexContent mixed="false">
-          <s:extension base="tns:MBRequest" />
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="RequiredOnly" nillable="true" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
         </s:complexContent>
       </s:complexType>
       <s:element name="GetClientIndexesResponse">
@@ -858,6 +939,40 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+      <s:element name="UploadClientPhoto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:UploadClientPhotoRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UploadClientPhotoRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ClientID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Bytes" type="s:base64Binary" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UploadClientPhotoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadClientPhotoResult" type="tns:UploadClientPhotoResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UploadClientPhotoResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PhotoUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ClientID" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
       <s:element name="GetClientFormulaNotes">
         <s:complexType>
           <s:sequence>
@@ -985,7 +1100,11 @@
       </s:element>
       <s:complexType name="GetClientReferralTypesRequest">
         <s:complexContent mixed="false">
-          <s:extension base="tns:MBRequest" />
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IncludeInactive" nillable="true" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
         </s:complexContent>
       </s:complexType>
       <s:element name="GetClientReferralTypesResponse">
@@ -1047,6 +1166,7 @@
           <s:extension base="tns:ClientService">
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="RestrictedLocations" type="tns:ArrayOfLocation" />
+              <s:element minOccurs="0" maxOccurs="1" name="IconCode" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -1092,8 +1212,12 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:MBObject">
             <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="AgreementDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="ContractName" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
-              <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ID" nillable="true" type="s:int" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -1235,6 +1359,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="WebSignup" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="SignedIn" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="AppointmentStatus" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="MakeUp" nillable="true" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="Service" type="tns:ClientService" />
             </s:sequence>
@@ -1255,6 +1380,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="ClientID" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="StartDate" nillable="true" type="s:dateTime" />
               <s:element minOccurs="1" maxOccurs="1" name="EndDate" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="SaleID" nillable="true" type="s:int" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -1286,6 +1412,7 @@
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="Sale" type="tns:Sale" />
               <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AccountPayment" nillable="true" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="Price" type="s:decimal" />
               <s:element minOccurs="0" maxOccurs="1" name="AmountPaid" type="s:decimal" />
               <s:element minOccurs="0" maxOccurs="1" name="Discount" type="s:decimal" />
@@ -1317,6 +1444,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="Method" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastFour" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
         </s:sequence>
       </s:complexType>
@@ -1412,6 +1540,7 @@
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Client" type="tns:Client" />
+              <s:element minOccurs="0" maxOccurs="1" name="Staff" type="tns:Staff" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -1534,6 +1663,12 @@
   </wsdl:message>
   <wsdl:message name="UploadClientDocumentSoapOut">
     <wsdl:part name="parameters" element="tns:UploadClientDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadClientPhotoSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadClientPhoto" />
+  </wsdl:message>
+  <wsdl:message name="UploadClientPhotoSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadClientPhotoResponse" />
   </wsdl:message>
   <wsdl:message name="GetClientFormulaNotesSoapIn">
     <wsdl:part name="parameters" element="tns:GetClientFormulaNotes" />
@@ -1671,6 +1806,11 @@
       <wsdl:input message="tns:UploadClientDocumentSoapIn" />
       <wsdl:output message="tns:UploadClientDocumentSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="UploadClientPhoto">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Upload a client photo.</wsdl:documentation>
+      <wsdl:input message="tns:UploadClientPhotoSoapIn" />
+      <wsdl:output message="tns:UploadClientPhotoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetClientFormulaNotes">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of client formula notes.</wsdl:documentation>
       <wsdl:input message="tns:GetClientFormulaNotesSoapIn" />
@@ -1732,7 +1872,7 @@
       <wsdl:output message="tns:GetRequiredClientFieldsSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ValidateLogin">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Validates a username and password. This method returns the associated clients record and a session guid on success.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Validates a username and password. This method returns the associated clients record and a session GUID on success.</wsdl:documentation>
       <wsdl:input message="tns:ValidateLoginSoapIn" />
       <wsdl:output message="tns:ValidateLoginSoapOut" />
     </wsdl:operation>
@@ -1823,6 +1963,15 @@
     </wsdl:operation>
     <wsdl:operation name="UploadClientDocument">
       <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/UploadClientDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadClientPhoto">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/UploadClientPhoto" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

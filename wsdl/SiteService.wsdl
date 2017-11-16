@@ -17,6 +17,7 @@
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="SearchText" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="RelatedSiteID" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ShowOnlyTotalWOD" nillable="true" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -48,6 +49,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="SiteIDs" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="LocationID" nillable="true" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:simpleType name="XMLDetailLevel">
@@ -120,6 +122,11 @@
           <s:element minOccurs="0" maxOccurs="1" name="AcceptsAmericanExpress" type="s:boolean" />
           <s:element minOccurs="0" maxOccurs="1" name="ContactEmail" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ESA" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalWOD" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxInclusivePrices" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMSPackageEnabled" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllowsDashboardAccess" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PricingLevel" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="GetLocations">
@@ -295,6 +302,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="ScheduleType" nillable="true" type="tns:ScheduleType" />
+              <s:element minOccurs="1" maxOccurs="1" name="CancelOffset" nillable="true" type="s:int" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -343,6 +351,7 @@
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="DefaultTimeLength" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="ProgramID" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumDeducted" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
@@ -508,6 +517,136 @@
           <s:extension base="tns:MBResult" />
         </s:complexContent>
       </s:complexType>
+      <s:element name="GetMobileProviders">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:GetMobileProvidersRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetMobileProvidersRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetMobileProvidersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMobileProvidersResult" type="tns:GetMobileProvidersResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetMobileProvidersResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="MobileProviders" type="tns:ArrayOfMobileProvider" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfMobileProvider">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MobileProvider" nillable="true" type="tns:MobileProvider" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MobileProvider">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ProviderID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProviderName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProviderAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProspectStages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:GetProspectStagesRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetProspectStagesRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IncludeInactive" nillable="true" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetProspectStagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProspectStagesResult" type="tns:GetProspectStagesResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetProspectStagesResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ProspectStages" type="tns:ArrayOfProspectStage" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfProspectStage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProspectStage" nillable="true" type="tns:ProspectStage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProspectStage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetGenders">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:GetGendersRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetGendersRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IncludeInactive" nillable="true" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetGendersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGendersResult" type="tns:GetGendersResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetGendersResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="GenderOptions" type="tns:ArrayOfGenderOption" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfGenderOption">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GenderOption" nillable="true" type="tns:GenderOption" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GenderOption">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsActive" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSystem" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
     <s:schema targetNamespace="http://clients.mindbodyonline.com/API/0_4">
       <s:complexType name="Row">
@@ -576,6 +715,24 @@
   <wsdl:message name="ReserveResourceSoapOut">
     <wsdl:part name="parameters" element="tns:ReserveResourceResponse" />
   </wsdl:message>
+  <wsdl:message name="GetMobileProvidersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMobileProviders" />
+  </wsdl:message>
+  <wsdl:message name="GetMobileProvidersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMobileProvidersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProspectStagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProspectStages" />
+  </wsdl:message>
+  <wsdl:message name="GetProspectStagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProspectStagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGendersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGenders" />
+  </wsdl:message>
+  <wsdl:message name="GetGendersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGendersResponse" />
+  </wsdl:message>
   <wsdl:portType name="Site_x0020_ServiceSoap">
     <wsdl:operation name="GetSites">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of sites.</wsdl:documentation>
@@ -621,6 +778,21 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Reserves a resource.</wsdl:documentation>
       <wsdl:input message="tns:ReserveResourceSoapIn" />
       <wsdl:output message="tns:ReserveResourceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMobileProviders">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of active mobile providers.</wsdl:documentation>
+      <wsdl:input message="tns:GetMobileProvidersSoapIn" />
+      <wsdl:output message="tns:GetMobileProvidersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProspectStages">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of prospect stages for a site.</wsdl:documentation>
+      <wsdl:input message="tns:GetProspectStagesSoapIn" />
+      <wsdl:output message="tns:GetProspectStagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGenders">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of prospect stages for a site.</wsdl:documentation>
+      <wsdl:input message="tns:GetGendersSoapIn" />
+      <wsdl:output message="tns:GetGendersSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Site_x0020_ServiceSoap" type="tns:Site_x0020_ServiceSoap">
@@ -699,6 +871,33 @@
     </wsdl:operation>
     <wsdl:operation name="ReserveResource">
       <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/ReserveResource" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMobileProviders">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/GetMobileProviders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProspectStages">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/GetProspectStages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGenders">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/GetGenders" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

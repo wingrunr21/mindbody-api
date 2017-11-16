@@ -52,6 +52,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="SiteIDs" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="LocationID" nillable="true" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:simpleType name="XMLDetailLevel">
@@ -126,6 +127,7 @@
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="GenderPreference" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="Duration" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProviderID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:long" />
               <s:element minOccurs="0" maxOccurs="1" name="Status" type="tns:AppointmentStatus" />
@@ -174,6 +176,11 @@
           <s:element minOccurs="0" maxOccurs="1" name="AcceptsAmericanExpress" type="s:boolean" />
           <s:element minOccurs="0" maxOccurs="1" name="ContactEmail" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ESA" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalWOD" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxInclusivePrices" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMSPackageEnabled" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllowsDashboardAccess" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PricingLevel" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Resource">
@@ -221,6 +228,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="ScheduleType" nillable="true" type="tns:ScheduleType" />
+              <s:element minOccurs="1" maxOccurs="1" name="CancelOffset" nillable="true" type="s:int" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -236,6 +244,19 @@
           <s:enumeration value="Arrival" />
         </s:restriction>
       </s:simpleType>
+      <s:complexType name="SalesRep">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SalesRepNumber" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ID" nillable="true" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SalesRepNumbers" type="tns:ArrayOfInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
       <s:complexType name="Rep">
         <s:complexContent mixed="false">
           <s:extension base="tns:MBObject">
@@ -264,7 +285,16 @@
               <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="ForeignZip" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SortOrder" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="LoginLocations" type="tns:ArrayOfLocation" />
+              <s:element minOccurs="0" maxOccurs="1" name="MultiLocation" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="AppointmentTrn" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReservationTrn" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="IndependentContractor" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="AlwaysAllowDoubleBooking" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserAccessLevel" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProviderIDs" type="tns:ArrayOfString" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProviderIDUpdateList" type="tns:ArrayOfProviderIDUpdate" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:long" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
@@ -321,6 +351,7 @@
             <s:sequence>
               <s:element minOccurs="1" maxOccurs="1" name="DefaultTimeLength" nillable="true" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="ProgramID" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumDeducted" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
@@ -376,6 +407,17 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Location" nillable="true" type="tns:Location" />
         </s:sequence>
       </s:complexType>
+      <s:complexType name="ArrayOfProviderIDUpdate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProviderIDUpdate" nillable="true" type="tns:ProviderIDUpdate" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProviderIDUpdate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OldProviderID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NewProviderID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:complexType name="ClientRelationship">
         <s:complexContent mixed="false">
           <s:extension base="tns:MBObject">
@@ -397,6 +439,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MobileProvider" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="ClientCreditCard" type="tns:ClientCreditCard" />
               <s:element minOccurs="0" maxOccurs="1" name="LastFormulaNotes" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="AppointmentGenderPreference" type="s:string" />
@@ -405,12 +448,19 @@
               <s:element minOccurs="0" maxOccurs="1" name="Inactive" nillable="true" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="ClientRelationships" type="tns:ArrayOfClientRelationship" />
               <s:element minOccurs="0" maxOccurs="1" name="Reps" type="tns:ArrayOfRep" />
+              <s:element minOccurs="0" maxOccurs="1" name="SaleReps" type="tns:ArrayOfSalesRep" />
               <s:element minOccurs="0" maxOccurs="1" name="CustomClientFields" type="tns:ArrayOfCustomClientField" />
               <s:element minOccurs="0" maxOccurs="1" name="LiabilityRelease" nillable="true" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoName" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoRelationship" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoPhone" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="EmergencyContactInfoEmail" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PromotionalEmailOptIn" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreationDate" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Liability" type="tns:Liability" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProspectStage" type="tns:ProspectStage" />
+              <s:element minOccurs="0" maxOccurs="1" name="UniqueID" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="MembershipIcon" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
@@ -436,6 +486,8 @@
               <s:element minOccurs="0" maxOccurs="1" name="RedAlert" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="PhotoURL" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="IsProspect" nillable="true" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ContactMethod" nillable="true" type="s:short" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -449,6 +501,8 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:MBObject">
             <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="RequiredBusinessMode" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="RequiredConsumerMode" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
@@ -469,6 +523,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ActionCode" />
               <s:element minOccurs="0" maxOccurs="1" name="ID" nillable="true" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Active" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -497,6 +552,11 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Rep" nillable="true" type="tns:Rep" />
         </s:sequence>
       </s:complexType>
+      <s:complexType name="ArrayOfSalesRep">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SalesRep" nillable="true" type="tns:SalesRep" />
+        </s:sequence>
+      </s:complexType>
       <s:complexType name="ArrayOfCustomClientField">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="CustomClientField" nillable="true" type="tns:CustomClientField" />
@@ -508,6 +568,20 @@
           <s:element minOccurs="0" maxOccurs="1" name="DataType" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Liability">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsReleased" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AgreementDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReleasedBy" nillable="true" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProspectStage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Relationship">
@@ -525,6 +599,7 @@
           <s:enumeration value="Arrived" />
           <s:enumeration value="NoShow" />
           <s:enumeration value="Cancelled" />
+          <s:enumeration value="LateCancelled" />
         </s:restriction>
       </s:simpleType>
       <s:complexType name="ArrayOfResource">
@@ -548,6 +623,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="SendEmail" nillable="true" type="s:boolean" />
               <s:element minOccurs="1" maxOccurs="1" name="ApplyPayment" nillable="true" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="Appointments" type="tns:ArrayOfAppointment" />
+              <s:element minOccurs="1" maxOccurs="1" name="IgnoreDefaultSessionLength" nillable="true" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -584,6 +660,8 @@
               <s:element minOccurs="0" maxOccurs="1" name="StaffIDs" type="tns:ArrayOfLong" />
               <s:element minOccurs="1" maxOccurs="1" name="StartDate" nillable="true" type="s:dateTime" />
               <s:element minOccurs="1" maxOccurs="1" name="EndDate" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="AppointmentID" nillable="true" type="s:long" />
+              <s:element minOccurs="1" maxOccurs="1" name="IgnoreDefaultSessionLength" nillable="true" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -673,6 +751,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="UnavailableDescription" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="IsUnavailable" type="s:boolean" />
               <s:element minOccurs="1" maxOccurs="1" name="PublicDisplay" nillable="true" type="tns:AvailabilityDisplay" />
+              <s:element minOccurs="0" maxOccurs="1" name="Execute" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
