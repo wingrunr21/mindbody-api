@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://clients.mindbodyonline.com/api/0_5" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://clients.mindbodyonline.com/API/0_4" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://clients.mindbodyonline.com/api/0_5" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://clients.mindbodyonline.com/api/0_5">
+      <s:import namespace="http://clients.mindbodyonline.com/API/0_4" />
+      <s:element name="SelectDataXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:SelectDataXmlRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SelectDataXmlRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SelectSql" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MBRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SourceCredentials" type="tns:SourceCredentials" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserCredentials" type="tns:UserCredentials" />
+          <s:element minOccurs="1" maxOccurs="1" name="XMLDetail" nillable="true" type="tns:XMLDetailLevel" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageSize" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentPageIndex" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SourceCredentials">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SourceName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteIDs" type="tns:ArrayOfInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserCredentials">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteIDs" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="LocationID" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="XMLDetailLevel">
+        <s:restriction base="s:string">
+          <s:enumeration value="Bare" />
+          <s:enumeration value="Basic" />
+          <s:enumeration value="Full" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SelectDataXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectDataXmlResult" type="tns:SelectDataXmlResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SelectDataXmlResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Results" type="s1:RecordSet" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MBResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:StatusCode" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XMLDetail" type="tns:XMLDetailLevel" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResultCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentPageIndex" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPageCount" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="StatusCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="InvalidCredentials" />
+          <s:enumeration value="InvalidParameters" />
+          <s:enumeration value="InternalException" />
+          <s:enumeration value="Unknown" />
+          <s:enumeration value="FailedAction" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="FunctionDataXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:FunctionDataXmlRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FunctionDataXmlRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="FunctionName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FunctionParams" type="tns:ArrayOfFunctionParam" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfFunctionParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FunctionParam" nillable="true" type="tns:FunctionParam" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FunctionParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ParamName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParamValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParamDataType" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FunctionDataXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FunctionDataXmlResult" type="tns:SelectDataXmlResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FunctionDataCSV">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:FunctionDataXmlRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FunctionDataCSVResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FunctionDataCSVResult" type="tns:SelectDataCSVResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SelectDataCSVResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CSV" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SelectDataCSV">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:SelectDataCSVRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SelectDataCSVRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SelectSql" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SelectDataCSVResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectDataCSVResult" type="tns:SelectDataCSVResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FunctionAggregateDataXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:FunctionDataXmlRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FunctionAggregateDataXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FunctionAggregateDataXmlResult" type="tns:SelectDataXmlResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectAggregateDataXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:SelectAggregateDataXmlRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SelectAggregateDataXmlRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SelectSql" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SelectAggregateDataXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectAggregateDataXmlResult" type="tns:SelectAggregateDataXmlResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SelectAggregateDataXmlResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Results" type="s1:RecordSet" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SelectAggregateDataCSV">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:SelectAggregateDataCSVRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SelectAggregateDataCSVRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SelectSql" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SelectAggregateDataCSVResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectAggregateDataCSVResult" type="tns:SelectAggregateDataCSVResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SelectAggregateDataCSVResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CSV" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetFunctionNames">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:GetFunctionNamesRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetFunctionNamesRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetFunctionNamesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFunctionNamesResult" type="tns:GetFunctionNamesResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetFunctionNamesResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Functions" type="tns:ArrayOfApiFunction" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfApiFunction">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ApiFunction" nillable="true" type="tns:ApiFunction" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ApiFunction">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetFunctionParameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:GetFunctionParametersRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetFunctionParametersRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="FunctionID" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetFunctionParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFunctionParametersResult" type="tns:GetFunctionParametersResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetFunctionParametersResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Parameters" type="tns:ArrayOfApiFunctionParameter" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfApiFunctionParameter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ApiFunctionParameter" nillable="true" type="tns:ApiFunctionParameter" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ApiFunctionParameter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isIterable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isRequired" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSitesWithFunctionDataAccess">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:GetSitesWithFunctionDataAccessRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetSitesWithFunctionDataAccessRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetSitesWithFunctionDataAccessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSitesWithFunctionDataAccessResult" type="tns:GetSitesWithFunctionDataAccessResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetSitesWithFunctionDataAccessResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Sites" type="tns:ArrayOfSite" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfSite">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Site" nillable="true" type="tns:Site" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Site">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LogoURL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PageColor1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PageColor2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PageColor3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PageColor4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcceptsVisa" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcceptsDiscover" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcceptsMasterCard" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcceptsAmericanExpress" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContactEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ESA" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalWOD" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxInclusivePrices" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMSPackageEnabled" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllowsDashboardAccess" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PricingLevel" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RunFunctionForJob">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:RunFunctionForJobRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RunFunctionForJobRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="JobID" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="RunFunctionForJobResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RunFunctionForJobResult" type="tns:RunFunctionForJobResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RunFunctionForJobResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MBResult" />
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+    <s:schema targetNamespace="http://clients.mindbodyonline.com/API/0_4">
+      <s:complexType name="Row">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Content" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RecordSet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Row" type="s1:Row" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SelectDataXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectDataXml" />
+  </wsdl:message>
+  <wsdl:message name="SelectDataXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectDataXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="FunctionDataXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:FunctionDataXml" />
+  </wsdl:message>
+  <wsdl:message name="FunctionDataXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:FunctionDataXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="FunctionDataCSVSoapIn">
+    <wsdl:part name="parameters" element="tns:FunctionDataCSV" />
+  </wsdl:message>
+  <wsdl:message name="FunctionDataCSVSoapOut">
+    <wsdl:part name="parameters" element="tns:FunctionDataCSVResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectDataCSVSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectDataCSV" />
+  </wsdl:message>
+  <wsdl:message name="SelectDataCSVSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectDataCSVResponse" />
+  </wsdl:message>
+  <wsdl:message name="FunctionAggregateDataXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:FunctionAggregateDataXml" />
+  </wsdl:message>
+  <wsdl:message name="FunctionAggregateDataXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:FunctionAggregateDataXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectAggregateDataXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectAggregateDataXml" />
+  </wsdl:message>
+  <wsdl:message name="SelectAggregateDataXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectAggregateDataXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectAggregateDataCSVSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectAggregateDataCSV" />
+  </wsdl:message>
+  <wsdl:message name="SelectAggregateDataCSVSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectAggregateDataCSVResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFunctionNamesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFunctionNames" />
+  </wsdl:message>
+  <wsdl:message name="GetFunctionNamesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFunctionNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFunctionParametersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFunctionParameters" />
+  </wsdl:message>
+  <wsdl:message name="GetFunctionParametersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFunctionParametersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSitesWithFunctionDataAccessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSitesWithFunctionDataAccess" />
+  </wsdl:message>
+  <wsdl:message name="GetSitesWithFunctionDataAccessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSitesWithFunctionDataAccessResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunFunctionForJobSoapIn">
+    <wsdl:part name="parameters" element="tns:RunFunctionForJob" />
+  </wsdl:message>
+  <wsdl:message name="RunFunctionForJobSoapOut">
+    <wsdl:part name="parameters" element="tns:RunFunctionForJobResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DataServiceSoap">
+    <wsdl:operation name="SelectDataXml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Issue a select statement to your MB database</wsdl:documentation>
+      <wsdl:input message="tns:SelectDataXmlSoapIn" />
+      <wsdl:output message="tns:SelectDataXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FunctionDataXml">
+      <wsdl:input message="tns:FunctionDataXmlSoapIn" />
+      <wsdl:output message="tns:FunctionDataXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FunctionDataCSV">
+      <wsdl:input message="tns:FunctionDataCSVSoapIn" />
+      <wsdl:output message="tns:FunctionDataCSVSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectDataCSV">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Issue a select statement to your MB database</wsdl:documentation>
+      <wsdl:input message="tns:SelectDataCSVSoapIn" />
+      <wsdl:output message="tns:SelectDataCSVSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FunctionAggregateDataXml">
+      <wsdl:input message="tns:FunctionAggregateDataXmlSoapIn" />
+      <wsdl:output message="tns:FunctionAggregateDataXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAggregateDataXml">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Issue a select statement to aggregate data</wsdl:documentation>
+      <wsdl:input message="tns:SelectAggregateDataXmlSoapIn" />
+      <wsdl:output message="tns:SelectAggregateDataXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAggregateDataCSV">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Issue a select statement to aggregate data</wsdl:documentation>
+      <wsdl:input message="tns:SelectAggregateDataCSVSoapIn" />
+      <wsdl:output message="tns:SelectAggregateDataCSVSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFunctionNames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve all available FunctionData function names for a given sourcename.</wsdl:documentation>
+      <wsdl:input message="tns:GetFunctionNamesSoapIn" />
+      <wsdl:output message="tns:GetFunctionNamesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFunctionParameters">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve all available parameters for a given function.</wsdl:documentation>
+      <wsdl:input message="tns:GetFunctionParametersSoapIn" />
+      <wsdl:output message="tns:GetFunctionParametersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSitesWithFunctionDataAccess">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve all sites that you can access with FunctionData.</wsdl:documentation>
+      <wsdl:input message="tns:GetSitesWithFunctionDataAccessSoapIn" />
+      <wsdl:output message="tns:GetSitesWithFunctionDataAccessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunFunctionForJob">
+      <wsdl:input message="tns:RunFunctionForJobSoapIn" />
+      <wsdl:output message="tns:RunFunctionForJobSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DataServiceSoap" type="tns:DataServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SelectDataXml">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/SelectDataXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FunctionDataXml">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/FunctionDataXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FunctionDataCSV">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/FunctionDataCSV" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectDataCSV">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/SelectDataCSV" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FunctionAggregateDataXml">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/FunctionAggregateDataXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAggregateDataXml">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/SelectAggregateDataXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAggregateDataCSV">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/SelectAggregateDataCSV" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFunctionNames">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/GetFunctionNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFunctionParameters">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/GetFunctionParameters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSitesWithFunctionDataAccess">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/GetSitesWithFunctionDataAccess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunFunctionForJob">
+      <soap:operation soapAction="http://clients.mindbodyonline.com/api/0_5/RunFunctionForJob" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataService">
+    <wsdl:port name="DataServiceSoap" binding="tns:DataServiceSoap">
+      <soap:address location="https://api.mindbodyonline.com/0_5/DataService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

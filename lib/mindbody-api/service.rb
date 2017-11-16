@@ -33,6 +33,7 @@ end
 require 'mindbody-api/services/appointment_service'
 require 'mindbody-api/services/class_service'
 require 'mindbody-api/services/client_service'
+require 'mindbody-api/services/data_service'
 require 'mindbody-api/services/finder_service'
 require 'mindbody-api/services/sale_service'
 require 'mindbody-api/services/site_service'
