@@ -30,7 +30,7 @@ module MindBody
         # TODO this needs fixed to support various list types
         locals.each_pair do |key, value|
           if value.is_a? Array
-            locals[key] = {'int' => value}
+            locals[key] = (key == 'ClientIDs' ? { 'string' => value } : { 'int' => value }) # ClientIDs are defined as array of strings in the WSDL contract
           end
         end
       end
