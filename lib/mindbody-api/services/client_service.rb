@@ -20,8 +20,8 @@ module MindBody
       operation :get_client_visits,              :required => [:client_id]
       operation :get_client_purchases,           :required => [:client_id]
       operation :get_client_schedule,            :required => [:client_id]
-      operation :get_required_client_fields,                                                                                :locals => false
-      operation :validate_login,                 :required => [:username, :password],                                       :locals => false
+      operation :get_required_client_fields
+      operation :validate_login,                 :required => [:username, :password]
       operation :update_client_services,         :required => [:client_services]
       operation :send_user_new_password,         :required => [:user_email, :user_first_name, :user_last_name],             :locals => false
     end
