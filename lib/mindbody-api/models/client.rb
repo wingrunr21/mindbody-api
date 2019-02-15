@@ -2,6 +2,7 @@ module MindBody
   module Models
     class Client < Base
       attribute :id, Integer
+      attribute :unique_id, Integer
       attribute :first_name, String
       attribute :last_name, String
       attribute :gender, String
