@@ -25,6 +25,7 @@ module MindBody
       attribute :photo_url, String
       attribute :username, String
       attribute :referred_by, String
+      attribute :promotional_email_opt_in, Boolean
       attribute :first_appointment_date, DateTime
       attribute :emergency_contact_info_name, String
       attribute :emergency_contact_info_relationship, String
